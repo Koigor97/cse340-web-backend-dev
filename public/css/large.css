@@ -1,0 +1,83 @@
+@media only screen and (min-width: 56.25em) {
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    background-image: url("../images/site/small_check.jpg");
+    display: grid;
+    font-size: 2rem;
+    place-items: center;
+    padding-block: 3rem;
+  }
+
+  .wrapper {
+    background-color: var(--secondary-color);
+    width: 90%;
+    border-radius: 0.5rem;
+    border: 0.5rem solid var(--tertiary-color);
+  }
+
+  .logo {
+    width: 50%;
+  }
+
+  /* ************* HEADER AND NAVIGATION ************ */
+  .account-btn {
+    align-items: normal;
+    gap: 5px;
+    order: 1;
+  }
+
+  .account-icon {
+    display: block;
+    font-size: 2.5rem;
+  }
+
+  .nav__menu {
+    position: static;
+    background-color: transparent;
+    color: var(--primary-color-variant-1);
+    padding: 0;
+    border-radius: 0;
+
+    display: block;
+    transition: none;
+    margin-inline-end: 1.5rem;
+  }
+
+  .nav__menu--menu {
+    text-decoration: none;
+  }
+
+  .nav__list {
+    padding: 0.3em 1em;
+    border-radius: 0.5rem;
+  }
+
+  .nav__list:hover {
+    background-color: var(--secondary-color-variant-2);
+    outline: solid var(--tertiary-color);
+  }
+
+  .nav__hamburger-menu,
+  .nav__close-btn {
+    display: none;
+  }
+
+  .nav__menu--menu,
+  .main-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  /* Vehicles Navigation */
+  .vehicles-nav {
+    width: 90%;
+    margin: 1.5rem auto;
+    border-radius: 0.5rem;
+  }
+}
+
+/* ************* HEADER AND NAVIGATION ************ */
