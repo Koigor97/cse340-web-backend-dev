@@ -11,6 +11,11 @@ const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const static = require("./routes/static");
 
+/**********************
+ * Helper function
+ ************************/
+const { pageDescription } = require("./lib/pageMetaDesc");
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -25,7 +30,9 @@ app.use(static);
 
 // Index route
 app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+  const pageDesc = pageDescription();
+
+  res.render("index", { title: "Home", description: pageDesc.homePage });
 });
 
 /* ***********************
