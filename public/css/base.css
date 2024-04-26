@@ -5,11 +5,160 @@
 :root {
   --header-font: "IBM Plex Mono", monospace;
   --body-font: "Lato", sans-serif;
+
+  --primary-color: #020d19;
+  --primary-color-variant-1: #19232e;
+  --primary-color-variant-2: #2e3741;
+
+  --secondary-color: #f8fafc;
+  --secondary-color-variant-1: #f1f5f9;
+  --secondary-color-variant-2: #e2e8f0;
+
+  --tertiary-color: #f59e0b;
+  --tertiary-color-variant-1: #fbbf24;
+  --tertiary-color-variant-2: #fcd34d;
 }
 
-/******* Change Box Model ***************/
+/******* Base Configurations ***************/
 *,
-*:before,
-*:after {
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  font-size: 50%;
+}
+
+body {
+  color: var(--primary-color-variant-1);
+  font-family: var(--body-font);
+  font-size: 2.4rem;
+}
+
+nav li {
+  list-style: none;
+  cursor: pointer;
+}
+
+nav li a,
+.account-btn {
+  text-decoration: none;
+  color: currentColor;
+  cursor: pointer;
+}
+
+.logo {
+  width: 15rem;
+  height: auto;
+}
+
+/* .wrapper {
+  padding-inline: 1.5rem;
+  padding-block: 2rem;
+} */
+
+/* ************* HEADER AND NAVIGATION ************ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-inline: 2rem; */
+  padding-inline: 1.5rem;
+  padding-block: 2rem;
+}
+
+.nav__hamburger-menu,
+.nav__close-btn {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  font-size: 2.9rem;
+  padding: 0.5rem;
+  border: 2px solid var(--secondary-color-variant-2);
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.nav__close-btn {
+  display: none;
+}
+
+.main-nav {
+  display: flex;
+  position: relative;
+  gap: 1.5rem;
+}
+
+.nav__menu {
+  position: absolute;
+  right: 0;
+  top: 80%;
+
+  background-color: var(--primary-color-variant-2);
+  color: var(--secondary-color-variant-1);
+  padding-block: 1em;
+  padding-inline: 1.5em;
+  border-radius: 0.5rem;
+  transition: all 350ms ease-in;
+
+  display: none;
+}
+
+.nav__menu--menu {
+  display: grid;
+  gap: 2rem;
+  text-decoration: underline;
+}
+
+.account-btn {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  border-radius: 0.5rem;
+
+  order: -1;
+  display: flex;
+  align-items: center;
+}
+
+.account-icon {
+  display: none;
+}
+
+.active {
+  display: block;
+  top: 110%;
+}
+
+/* Vehicles Navigation */
+.vehicles-nav {
+  background-color: var(--primary-color-variant-1);
+  color: #fff;
+  padding-block: 1em;
+  padding-inline: 1em;
+  margin-block-start: 1.5rem;
+  /* width: 100%; */
+}
+
+.vehicles-nav ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.vehicles-nav ul li {
+  border: 2px dotted var(--secondary-color-variant-2);
+  border-radius: 5px;
+
+  padding-inline: 0.3em;
+  padding-block: 0.4em;
+}
+
+.vehicles-nav ul li:hover {
+  background-color: var(--secondary-color-variant-1);
+  color: var(--primary-color-variant-2);
 }
