@@ -13,7 +13,7 @@
 
   .wrapper {
     background-color: var(--secondary-color);
-    width: 90%;
+    width: 85%;
     border-radius: 0.5rem;
     border: 0.5rem solid var(--tertiary-color);
   }
@@ -51,7 +51,7 @@
   }
 
   .nav__list {
-    padding: 0.3em 1em;
+    padding: 0.3em 0.5em;
     border-radius: 0.5rem;
   }
 
@@ -74,10 +74,42 @@
 
   /* Vehicles Navigation */
   .vehicles-nav {
-    width: 90%;
+    width: 60%;
     margin: 1.5rem auto;
     border-radius: 0.5rem;
+    padding: 0.5em;
   }
+
+  .hero-content {
+    margin-inline: 2rem;
+    padding-inline: 0;
+  }
+
+  .hero-image {
+    width: 90%;
+  }
+
+  .hero-image-container div {
+    width: 40%;
+    padding-block: 1em;
+  }
+
+  /* upgrades */
+
+  /* .upgrade-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+} */
+
+  .upgrade-image-box {
+    width: 50%;
+  }
+
+  /* .upgrade-image-box img {
+  width: 100%;
+  height: auto;
+} */
 }
 
 /* ************* HEADER AND NAVIGATION ************ */
