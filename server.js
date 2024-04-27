@@ -15,6 +15,7 @@ const static = require("./routes/static");
  * Helper function
  ************************/
 const { pageDescription } = require("./lib/pageMetaDesc");
+const { upgradesAndReviews } = require("./lib/utils");
 
 /* ***********************
  * View Engine and Templates
@@ -31,8 +32,14 @@ app.use(static);
 // Index route
 app.get("/", (req, res) => {
   const pageDesc = pageDescription();
+  const upgrades = upgradesAndReviews();
+  // console.log(upgrades);
 
-  res.render("index", { title: "Home", description: pageDesc.homePage });
+  res.render("index", {
+    title: "Home",
+    description: pageDesc.homePage,
+    upgrades: upgrades,
+  });
 });
 
 /* ***********************
