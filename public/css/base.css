@@ -198,7 +198,6 @@ header {
 .hero-image-container div {
   width: 50%;
   background: rgba(226, 232, 240, 0.15);
-  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(5px);
   border: 1px solid var(--secondary-color-variant-2);
   border-radius: 0.5rem;
@@ -238,10 +237,15 @@ header {
   padding: 2rem 1rem;
 
   background: rgba(226, 232, 240, 0.15);
-  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(5px);
   border: 1px solid var(--primary-color-variant-2);
   border-radius: 0.5rem;
+}
+
+.upgrade-card div a {
+  color: var(--primary-color-variant-1);
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--tertiary-color);
 }
 
 .upgrade-image-box {
@@ -269,7 +273,6 @@ header {
 
 .reviews-container ul li::marker {
   content: "⚡️";
-  margin-inline-end: 1.5em;
 }
 
 @media only screen and (min-width: 38.062em) {

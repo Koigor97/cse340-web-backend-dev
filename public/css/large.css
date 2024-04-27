@@ -95,21 +95,9 @@
   }
 
   /* upgrades */
-
-  /* .upgrade-card {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  place-items: center;
-} */
-
   .upgrade-image-box {
     width: 50%;
   }
-
-  /* .upgrade-image-box img {
-  width: 100%;
-  height: auto;
-} */
 }
 
 /* ************* HEADER AND NAVIGATION ************ */
