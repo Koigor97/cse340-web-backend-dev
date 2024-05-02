@@ -240,3 +240,13 @@ VALUES   (
     'White',
     5
   );
+
+-- REPLACING part of inv_decscription text for inv_id = 10
+UPDATE public.inventory 
+	SET inv_description = REPLACE(inv_description, 'the small interiors', 'a huge interior')
+	WHERE inv_id = 10;
+
+-- REPLACING inv_images and inv_thumbnails for inventory table
+UPDATE public.inventory
+	SET inv_image = REPLACE(inv_image, '/images', '/images/vehicles'),
+		inv_thumbnail = REPLACE(inv_thumbnail, '/images', '/images/vehicles');
