@@ -5,17 +5,12 @@
 /* ***********************
  * Require Statements
  *************************/
+const baseController = require("./controllers/baseController");
 const express = require("express");
 const env = require("dotenv").config();
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const static = require("./routes/static");
-
-/**********************
- * Helper function
- ************************/
-const { pageDescription } = require("./lib/pageMetaDesc");
-const { upgradesAndReviews } = require("./lib/utils");
 
 /* ***********************
  * View Engine and Templates
@@ -30,17 +25,7 @@ app.set("layout", "layouts/layout");
 app.use(static);
 
 // Index route
-app.get("/", (req, res) => {
-  const pageDesc = pageDescription();
-  const upgrades = upgradesAndReviews();
-  // console.log(upgrades);
-
-  res.render("index", {
-    title: "Home",
-    description: pageDesc.homePage,
-    upgrades: upgrades,
-  });
-});
+app.get("/", baseController.buildHome);
 
 /* ***********************
  * Local Server Information
