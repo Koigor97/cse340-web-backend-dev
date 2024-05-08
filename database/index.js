@@ -9,7 +9,8 @@ dotenv.config();
  * If - Else will make determination which to use
  * **********************/
 let pool;
-if (process.env.NODE_ENV == "development") {
+if (process.env.NODE_ENV === "development") {
+  console.log(process.env.NODE_ENV);
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -23,8 +24,9 @@ if (process.env.NODE_ENV == "development") {
   module.exports = {
     async query(text, params) {
       try {
-        const res = await pool.query(text, params);
+        const res = await pool.query(text);
         console.log("executed query", { text });
+        console.log(params);
         return res;
       } catch (error) {
         console.error("error in query", { text });
