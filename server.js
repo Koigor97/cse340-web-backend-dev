@@ -11,8 +11,8 @@ const env = require("dotenv").config();
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const static = require("./routes/static");
+// const baseController = require("./controllers/baseController");
 
-const { pageDescription } = require("./lib/pageMetaDesc");
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -26,15 +26,7 @@ app.set("layout", "layouts/layout");
 app.use(static);
 
 // Index route
-app.get("/", (req, res) => {
-  const pageDesc = pageDescription();
-  // console.log(upgrades);
-
-  res.render("index", {
-    title: "Home",
-    description: pageDesc.homePage,
-  });
-});
+app.get("/", baseController.buildHome);
 
 /* ***********************
  * Local Server Information
