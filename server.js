@@ -13,6 +13,7 @@ const app = express();
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const errorHandler = require("./middleware/errorHandler");
 
 /* ***********************
  * View Engine and Templates
@@ -30,6 +31,8 @@ app.use(static);
 app.get("/", baseController.buildHome);
 // Inventory route
 app.use("/inv", inventoryRoute);
+// Error handler
+app.use(errorHandler);
 
 /* ***********************
  * Local Server Information

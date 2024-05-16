@@ -29,7 +29,7 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function (data) {
   let grid;
   if (data.length > 0) {
-    grid = '<ul id="inv-display">';
+    grid = '<ul class="vehicle-grid" id="inv-display">';
     data.forEach((vehicle) => {
       grid += "<li>";
       grid +=
@@ -74,6 +74,27 @@ Util.buildClassificationGrid = async function (data) {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
   return grid;
+};
+
+Util.buildVehicleDetail = function (vehicle) {
+  return `
+    <div class="vehicle-detail">
+      <h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>
+      <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${
+    vehicle.inv_model
+  }">
+      <div class="details">
+        <p><strong>Price:</strong> $${new Intl.NumberFormat("en-US").format(
+          vehicle.inv_price
+        )}</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+        <p><strong>Mileage:</strong> 
+          ${vehicle.inv_miles}
+         miles</p>
+      </div>
+    </div>
+  `;
 };
 
 module.exports = Util;
