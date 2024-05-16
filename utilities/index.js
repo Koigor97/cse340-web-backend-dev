@@ -6,8 +6,6 @@ const Util = {};
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
-  // console.log("--------------------- Classification Table");
-  // console.log(data.rows);
   let list = "<ul>";
   data.rows.forEach((row) => {
     list += "<li>";
