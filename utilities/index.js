@@ -6,8 +6,9 @@ const Util = {};
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
+  // console.log("--------------------- Classification Table");
+  // console.log(data.rows);
   let list = "<ul>";
-  console.log(data);
   data.rows.forEach((row) => {
     list += "<li>";
     list +=
@@ -38,13 +39,13 @@ Util.buildClassificationGrid = async function (data) {
         vehicle.inv_id +
         '" title="View ' +
         vehicle.inv_make +
-        " " +
+        "" +
         vehicle.inv_model +
         'details"><img src="' +
         vehicle.inv_thumbnail +
         '" alt="Image of ' +
         vehicle.inv_make +
-        " " +
+        "" +
         vehicle.inv_model +
         ' on CSE Motors" /></a>';
       grid += '<div class="namePrice">';
@@ -55,11 +56,11 @@ Util.buildClassificationGrid = async function (data) {
         vehicle.inv_id +
         '" title="View ' +
         vehicle.inv_make +
-        " " +
+        "" +
         vehicle.inv_model +
         ' details">' +
         vehicle.inv_make +
-        " " +
+        "" +
         vehicle.inv_model +
         "</a>";
       grid += "</h2>";
