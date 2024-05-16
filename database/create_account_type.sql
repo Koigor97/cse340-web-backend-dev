@@ -52,11 +52,11 @@ CREATE TABLE IF NOT EXISTS public.account
 
 -- Data for Table `classification`
 INSERT INTO public.classification(classification_name)
-VALUES ('SUV'),
-	('Sedan'),
+VALUES ('Custom'),
 	('Sport'),
+	('SUV'),
 	('Truck'),
-	('Custom')
+	('Sedan')
 ;
 
 -- Data for table `inventory`
