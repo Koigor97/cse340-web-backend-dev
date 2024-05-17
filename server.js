@@ -9,6 +9,8 @@ const express = require("express");
 const env = require("dotenv").config();
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
+const session = require("express-session");
+const pool = require("./database/");
 
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
@@ -21,6 +23,22 @@ const errorHandler = require("./middleware/errorHandler");
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "layouts/layout");
+
+/* ***********************
+ * Middleware
+ *************************/
+app.use(
+  session({
+    store: new (require("connect-pg-simple")(session))({
+      createTableIfMissing: true,
+      pool,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    name: "sessionId",
+  })
+);
 
 /* ***********************
  * Routes
