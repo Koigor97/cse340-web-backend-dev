@@ -11,18 +11,13 @@ const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const session = require("express-session");
 const pool = require("./database/");
+const bodyParser = require("body-parser");
 
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require("./routes/accountRoute");
 const errorHandler = require("./middleware/errorHandler");
-
-/* ***********************
- * View Engine and Templates
- *************************/
-app.set("view engine", "ejs");
-app.use(expressLayouts);
-app.set("layout", "layouts/layout");
 
 /* ***********************
  * Middleware
@@ -40,6 +35,24 @@ app.use(
   })
 );
 
+// Express Messages Middleware
+app.use(require("connect-flash")());
+app.use(function (req, res, next) {
+  res.locals.messages = require("express-messages")(req, res);
+  next();
+});
+
+// Body Parser Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // for par
+
+/* ***********************
+ * View Engine and Templates
+ *************************/
+app.set("view engine", "ejs");
+app.use(expressLayouts);
+app.set("layout", "layouts/layout");
+
 /* ***********************
  * Routes
  *************************/
@@ -49,6 +62,8 @@ app.use(static);
 app.get("/", baseController.buildHome);
 // Inventory route
 app.use("/inv", inventoryRoute);
+// Account route
+app.use("/account", accountRoute);
 // Error handler
 app.use(errorHandler);
 
