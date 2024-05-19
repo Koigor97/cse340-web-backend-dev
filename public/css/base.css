@@ -357,6 +357,115 @@ header {
   width: 120px;
 }
 
+/* flash messages */
+.notice {
+  list-style: none;
+  color: rgb(99, 99, 239);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+}
+.login-content h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.login-content p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+.card {
+  width: 100%;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.form-control label {
+  margin-bottom: 0.5rem;
+}
+.form-control input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form-control .label-text-alt {
+  font-size: 1.7rem;
+  color: var(--primary-color-variant-2);
+  text-decoration: none;
+}
+.form-control .label-text-alt:hover {
+  text-decoration: underline;
+}
+.form-control.mt-6 {
+  margin-top: 1.5rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  background-color: var(--primary-color-variant-2);
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+.btn:hover {
+  background-color: var(--primary-color-variant-1);
+}
+
+.signup-link {
+  margin-top: 1rem;
+  font-size: 1.7rem;
+  color: #555;
+}
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Styles for required input fields */
+input:required {
+  border-color: #ffcc00;
+  background-color: #fffbe6;
+}
+
+/* Styles for invalid input fields */
+input:required:invalid {
+  border-color: #e3342f;
+  background-color: #fdd;
+}
+
+/* Styles for valid input fields */
+input:required:valid {
+  border-color: #38c172;
+  background-color: #e6ffed;
+}
+
 @media only screen and (min-width: 38.062em) {
   .upgrades-wrapper {
     display: grid;
