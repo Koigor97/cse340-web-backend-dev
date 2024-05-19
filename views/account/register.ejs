@@ -1,4 +1,11 @@
 <div class="container">
+  <% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
   <div class="hero-content">
     <div class="text-center">
       <h1>Sign Up</h1>
