@@ -22,10 +22,21 @@ router.get(
   utilities.handleError(invController.buildAddClassificationView)
 );
 
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleError(invController.getInventoryJSON)
+);
+
 // Route to build inventory  view
 router.get(
   "/add-inventory",
   utilities.handleError(invController.buildAddInventoryView)
+);
+
+// Route to build edit inventory view
+router.get(
+  "/edit/:inv_id",
+  utilities.handleError(invController.editInventoryView)
 );
 
 // Route to process adding a classification
@@ -42,6 +53,14 @@ router.post(
   validation.inventoryRules(),
   validation.checkInventoryData,
   utilities.handleError(invController.addInventory)
+);
+
+// Route to handle the update request
+router.post(
+  "/update",
+  validation.inventoryRules(),
+  validation.checkUpdateData,
+  utilities.handleError(invController.updateInventory)
 );
 
 // Route for error testing
