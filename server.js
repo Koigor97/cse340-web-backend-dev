@@ -12,12 +12,14 @@ const app = express();
 const session = require("express-session");
 const pool = require("./database/");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const errorHandler = require("./middleware/errorHandler");
+const utilities = require("./utilities/");
 
 /* ***********************
  * Middleware
@@ -44,7 +46,13 @@ app.use(function (req, res, next) {
 
 // Body Parser Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); // for par
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Cookie Parser Middleware
+app.use(cookieParser());
+
+// Middleware to check token validity
+app.use(utilities.checkJWTToken);
 
 /* ***********************
  * View Engine and Templates
