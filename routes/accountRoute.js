@@ -18,6 +18,24 @@ router.get(
   utilities.handleError(accountController.manageAccount)
 );
 
+// Route to build update account view
+router.get("/update", utilities.handleErrors(accountController.buildUpdateAccount))
+
+//Update Account Type only Admin
+router.get(
+    "/accounttype",
+    utilities.adminType, 
+    utilities.handleErrors(accountController.buildAccountType))
+
+//Logout Account
+router.get("/logout", accountController.logoutAccount)
+
+//Update Account Type only Admin
+router.get(
+    "/accounttype",
+    utilities.adminType, 
+    utilities.handleErrors(accountController.buildAccountType))
+
 // Route to process registration
 router.post(
   "/register",
@@ -34,6 +52,22 @@ router.post(
   utilities.handleError(accountController.accountLogin)
 );
 
+// Update account from register page
+router.post(
+    "/update",
+    regValidate.updateAccountRules(),
+    regValidate.checkUpdAccData, 
+    utilities.handleErrors(accountController.updateAccount))
+
+router.post(
+    "/updatetype",
+    utilities.adminType,
+    regValidate.updateTypeRules(),
+    regValidate.checkUpdateTypeData,
+    utilities.handleErrors(accountController.updateType))
+
+
+router.use(utilities.checkJWTToken)
 // Error handler
 router.use(errorHandlers);
 
