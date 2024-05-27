@@ -6,40 +6,53 @@
     </div>
     <div class="card">
       <form class="card-body" action="/account/login" method="post">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Email</span>
-          </label>
-          <input
-            type="email"
-            name="account_email"
-            placeholder="email"
-            required
-          />
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <input
-            type="password"
-            name="account_password"
-            placeholder="password"
-            required
-            pattern='pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$'
-          />
-          <label class="label">
-            <a href="#" class="label-text-alt">Forgot password?</a>
-          </label>
-        </div>
-        <div class="form-control mt-6">
-          <button type="submit" class="btn">Login</button>
-        </div>
+        <fieldset>
+          <p><i>All fields are required.</i></p>
+          <%- messages() %> <% if (errors) { %>
+          <ul class="notice">
+            <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+          <% } %>
+          <div class="form-control">
+            <label class="label" id="email">
+              <span class="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              name="account_email"
+              placeholder="email"
+              required
+              value="<%= locals.account_email %>"
+            />
+          </div>
+          <div class="form-control">
+            <label class="label" id="password">
+              <span class="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              name="account_password"
+              placeholder="password"
+              required
+              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+            />
+            <div class="leftPswrd">
+              <span id="pswdBtn">Show Password</span>
+            </div>
+          </div>
+          <div class="form-control mt-6">
+            <button type="submit" class="btn" id="pswdBtn">Login</button>
+          </div>
+        </fieldset>
       </form>
       <div>
         <p>
-          Please make sure the password is at least 12 characters and has at
-          least 1 uppercase character, 1 number and 1 special character.
+          <i>
+            Passwords must be at least 12 characters and contain at least 1
+            number, 1 capital letter and 1 special character
+          </i>
         </p>
       </div>
       <div class="signup-link">
