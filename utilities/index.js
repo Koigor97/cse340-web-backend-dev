@@ -78,25 +78,48 @@ Util.buildClassificationGrid = async function (data) {
   return grid;
 };
 
-Util.buildVehicleDetail = function (vehicle) {
-  return `
-    <div class="vehicle-detail">
-      <h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>
-      <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${
-    vehicle.inv_model
-  }">
-      <div class="details">
-        <p><strong>Price:</strong> $${new Intl.NumberFormat("en-US").format(
-          vehicle.inv_price
-        )}</p>
-        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
-        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
-        <p><strong>Mileage:</strong> 
-          ${vehicle.inv_miles}
-         miles</p>
-      </div>
-    </div>
-  `;
+Util.buildVehicleDetail = function (data) {
+  let details;
+  if (!data) {
+    details = "<p>Sorry, we don't have that product.</p>";
+  } else {
+    details = '<div id="details-view">';
+    details += '<div id="image-box">';
+    details +=
+      '<img src="' +
+      data[0].inv_image +
+      '"' +
+      ' alt="Image of ' +
+      data[0].inv_year +
+      " " +
+      data[0].inv_make +
+      " " +
+      data[0].inv_model;
+    details += '"/>';
+    details += "</div>";
+    details += '<div id="info-box">';
+    details += "<h2> Details of ";
+    details +=
+      data[0].inv_year + " " + data[0].inv_make + " " + data[0].inv_model;
+    details += "</h2>";
+    details +=
+      '<p class="bold">Price: $' +
+      new Intl.NumberFormat("en-US").format(data[0].inv_price) +
+      "</p>";
+    details +=
+      '<p><span class="bold">Description:</span> ' +
+      data[0].inv_description +
+      "</p>";
+    details +=
+      '<p><span class="bold">Color:</span> ' + data[0].inv_color + "</p>";
+    details +=
+      '<p><span class="bold">Miles:</span> ' +
+      new Intl.NumberFormat("en-US").format(data[0].inv_miles) +
+      "</p>";
+    details += "</div>";
+    details += "</div>";
+  }
+  return details;
 };
 
 /**
@@ -124,11 +147,8 @@ Util.buildClassificationList = async function (classification_id = null) {
 };
 
 Util.handleError = function (fn) {
-  fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+  (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 };
-
-
-
 
 /* ****************************************
  * Middleware to check token validity
@@ -166,61 +186,56 @@ Util.checkLogin = (req, res, next) => {
   }
 };
 
-
 /******************************
  * Check account type
  **************************/
 Util.accountType = (req, res, next) => {
-  if(res.locals.accountData) {
+  if (res.locals.accountData) {
     if (res.locals.accountData.account_type != "Client") {
-      next()
+      next();
     } else {
-      req.flash("notice", "Access is forbidden.")
-      return res.redirect("account")
+      req.flash("notice", "Access is forbidden.");
+      return res.redirect("account");
     }
-  } else{
-    req.flash("notice", "You don't have the required account to access.")
-    return res.redirect("/account/login")
+  } else {
+    req.flash("notice", "You don't have the required account to access.");
+    return res.redirect("/account/login");
   }
-}
+};
 
 /******************************
  * Check account type of is Admin
  **************************/
 Util.adminType = (req, res, next) => {
-  if(res.locals.accountData) {
+  if (res.locals.accountData) {
     if (res.locals.accountData.account_type == "Admin") {
-      next()
+      next();
     } else {
-      req.flash("notice", "Access is forbidden.")
-      return res.redirect("/account/")
+      req.flash("notice", "Access is forbidden.");
+      return res.redirect("/account/");
     }
-  } else{
-    req.flash("notice", "You don't have the required account to access.")
-    return res.redirect("/account/login")
+  } else {
+    req.flash("notice", "You don't have the required account to access.");
+    return res.redirect("/account/login");
   }
-}
+};
 
 /************************
  * Build drop-down select list of mails.
  ********************/
 Util.buildEmailList = async function (account_id = null) {
-  let data = await accModel.getAccounts()
-  let emailList =
-    '<select name="account_id" id="emailList" required>'
-    emailList += "<option value=''>Choose an Email</option>"
+  let data = await accModel.getAccounts();
+  let emailList = '<select name="account_id" id="emailList" required>';
+  emailList += "<option value=''>Choose an Email</option>";
   data.rows.forEach((row) => {
-    emailList += '<option value="' + row.account_id + '"'
-    if (
-      account_id != null &&
-      row.account_id == account_id
-    ) {
-      emailList += " selected "
+    emailList += '<option value="' + row.account_id + '"';
+    if (account_id != null && row.account_id == account_id) {
+      emailList += " selected ";
     }
-    emailList += ">" + row.account_email + "</option>"
-  })
-  emailList += "</select>"
-  return emailList
-}
+    emailList += ">" + row.account_email + "</option>";
+  });
+  emailList += "</select>";
+  return emailList;
+};
 
 module.exports = Util;
