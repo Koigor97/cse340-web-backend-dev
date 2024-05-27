@@ -141,6 +141,33 @@ async function updateInventory(
   }
 }
 
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteInventoryItem(inv_id) {
+  try {
+    const sql = 'DELETE FROM inventory WHERE inv_id = $1';
+    const data = await pool.query(sql, [inv_id]);
+    return data; // return the number of rows affected
+  } catch (error) {
+    new Error("model error: " + error);
+    return false;
+  }
+}
+
+/* ***************************
+  *  fix bug happening to images
+  * and thumbnails
+* ************************** */
+async function fixUpdate() {
+  try {
+  const sql = "UPDATE public.inventory SET inv_image = REPLACE(inv_image, '&#x2F;', '/'), inv_thumbnail = REPLACE(inv_thumbnail, '&#x2F;', '/') RETURNING *"
+  return await pool.query(sql)
+  } catch (error) {
+    return error.message
+  }
+}
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -149,4 +176,7 @@ module.exports = {
   addInventory,
   getInventoryById,
   updateInventory,
+  deleteInventoryItem,
+  fixUpdate
 };
+
