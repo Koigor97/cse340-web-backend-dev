@@ -99,6 +99,11 @@
     width: 50%;
   }
 
+  .vehicle-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
   /* .vehicle-detail {
   
     display: grid;

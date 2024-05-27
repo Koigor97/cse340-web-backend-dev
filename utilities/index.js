@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const invModel = require("../models/inventory-model");
+const accModel = require("../models/account-model");
 const Util = {};
 
 /* ************************
@@ -78,48 +79,26 @@ Util.buildClassificationGrid = async function (data) {
   return grid;
 };
 
-Util.buildVehicleDetail = function (data) {
-  let details;
-  if (!data) {
-    details = "<p>Sorry, we don't have that product.</p>";
-  } else {
-    details = '<div id="details-view">';
-    details += '<div id="image-box">';
-    details +=
-      '<img src="' +
-      data[0].inv_image +
-      '"' +
-      ' alt="Image of ' +
-      data[0].inv_year +
-      " " +
-      data[0].inv_make +
-      " " +
-      data[0].inv_model;
-    details += '"/>';
-    details += "</div>";
-    details += '<div id="info-box">';
-    details += "<h2> Details of ";
-    details +=
-      data[0].inv_year + " " + data[0].inv_make + " " + data[0].inv_model;
-    details += "</h2>";
-    details +=
-      '<p class="bold">Price: $' +
-      new Intl.NumberFormat("en-US").format(data[0].inv_price) +
-      "</p>";
-    details +=
-      '<p><span class="bold">Description:</span> ' +
-      data[0].inv_description +
-      "</p>";
-    details +=
-      '<p><span class="bold">Color:</span> ' + data[0].inv_color + "</p>";
-    details +=
-      '<p><span class="bold">Miles:</span> ' +
-      new Intl.NumberFormat("en-US").format(data[0].inv_miles) +
-      "</p>";
-    details += "</div>";
-    details += "</div>";
-  }
-  return details;
+Util.buildVehicleDetail = function (vehicle) {
+    return `
+    <div class="vehicle-detail">
+      
+      <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${
+    vehicle.inv_model
+  }">
+      <div class="details">
+      <h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>
+        <p><strong>Price:</strong> $${new Intl.NumberFormat("en-US").format(
+          vehicle.inv_price
+        )}</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+        <p><strong>Mileage:</strong> 
+          ${vehicle.inv_miles}
+         miles</p>
+      </div>
+    </div>
+  `;
 };
 
 /**
@@ -146,10 +125,9 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList;
 };
 
-Util.handleError = function (fn) {
-  (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+Util.handleError = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
 };
-
 /* ****************************************
  * Middleware to check token validity
  **************************************** */

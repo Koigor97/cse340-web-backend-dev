@@ -12,8 +12,8 @@ router.get("/detail/:vehicleId", invController.buildVehicleDetail);
 
 // Route to build inventory management view
 router.get(
-  "/management",
-  utilities.handleError(invController.buildManagementView)
+  "/",
+  invController.buildManagementView
 );
 
 // Route to build classification view
@@ -49,15 +49,15 @@ router.get(
 router.post(
   "/add-classification",
   validation.classificationRules(),
-  validation.checkClassData,
+  validation.checkClassificationData,
   utilities.handleError(invController.addClassification)
 );
 
 // Route to process adding an inventory item
 router.post(
   "/add-inventory",
-  validation.inventoryRules(),
-  validation.checkInventoryData,
+  validation.vehicleRules(),
+  validation.checkVehicleData,
   utilities.handleError(invController.addInventory)
 );
 
@@ -67,7 +67,7 @@ router.post("/delete", utilities.handleError(invController.deleteInventoryItem))
 // Route to handle the update request
 router.post(
   "/update",
-  validation.inventoryRules(),
+  validation.vehicleRules(),
   validation.checkUpdateData,
   utilities.handleError(invController.updateInventory)
 );

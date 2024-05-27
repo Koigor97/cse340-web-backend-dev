@@ -466,6 +466,175 @@ input:required:valid {
   background-color: #e6ffed;
 }
 
+fieldset {
+  border: none;
+}
+
+/* #pswdBtn {
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 0.5em;
+  font-size: small;
+  width: 10em;
+  text-align: center;
+}
+
+.leftPswrd {
+  display: flex;
+  justify-content: left;
+}
+
+#pswdBtn {
+  background-color: #efefef;
+} */
+
+/******************************************* */
+.container-delete {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+h1.delete {
+  font-size: 24px;
+  color: #333;
+}
+
+p.delete {
+  font-size: 18px;
+  color: #666;
+}
+
+form.delete {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label.delete {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input.delete[type="text"],
+input.delete[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #555;
+}
+
+input.delete[readonly] {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+button.delete {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+button.delete:hover {
+  background-color: #c82333;
+}
+
+button.delete:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.notice-delete {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ffdddd;
+  color: #d9534f;
+  border: 1px solid #d43f3a;
+  border-radius: 4px;
+}
+
+.hidden-delete {
+  display: none;
+}
+
+/* Account management view */
+.account-management {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.account-management,
+.title {
+  padding: 1.5rem;
+}
+
+form.update {
+  padding: 1.5rem;
+}
+
+form label.top input,
+form label.top select {
+  display: block;
+
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 0.75rem;
+  color: black;
+  width: 100%;
+  max-width: 16rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.submitBtn {
+  margin-top: 5px;
+  text-align: center;
+}
+
+form p {
+  text-align: center;
+}
+
+#pswdBtn {
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 0.5em;
+  font-size: small;
+  width: 10em;
+  text-align: center;
+}
+
+.leftPswrd {
+  display: flex;
+  justify-content: left;
+}
+
+#pswdBtn {
+  background-color: #efefef;
+}
+
+.center {
+  padding-inline: 1.5rem;
+}
+
 @media only screen and (min-width: 38.062em) {
   .upgrades-wrapper {
     display: grid;
