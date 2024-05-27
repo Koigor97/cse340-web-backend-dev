@@ -39,6 +39,12 @@ router.get(
   utilities.handleError(invController.editInventoryView)
 );
 
+// Route to process deleting an inventory item
+router.get(
+  "/delete/:inv_id",
+  utilities.handleError(invController.buildDeleteConfirmation)
+);
+
 // Route to process adding a classification
 router.post(
   "/add-classification",
@@ -55,6 +61,9 @@ router.post(
   utilities.handleError(invController.addInventory)
 );
 
+// Route to process deleting an inventory item
+router.post("/delete", utilities.handleError(invController.deleteInventoryItem));
+
 // Route to handle the update request
 router.post(
   "/update",
@@ -69,3 +78,4 @@ router.get("/cause-error", (req, res, next) => {
 });
 
 module.exports = router;
+
