@@ -27,12 +27,19 @@
     </ul>
   </div>
 
-  <a
-    class="nav__link account-btn"
-    title="Click to log in"
-    href="/account/login"
-  >
-    My Account
-    <i class="ri-account-box-line account-icon"></i>
-  </a>
+  <% if (locals.loggedin) {%>
+            <a href="/account" title="Click to see account" class="accounthov"> Welcome <%- locals.accountData.account_firstname %></a><span> | </span><a href="/account/logout" title="Click to log out" class="accounthov">Logout</a>
+        <% } else{ %>
+             <a
+              class="nav__link account-btn"
+              title="Click to log in"
+              href="/account/login"
+            >
+              My Account
+              <i class="ri-account-box-line account-icon"></i>
+            </a>
+        <% } %>   
+
+  
+  
 </nav>
