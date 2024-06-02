@@ -80,7 +80,7 @@ Util.buildClassificationGrid = async function (data) {
 };
 
 Util.buildVehicleDetail = function (vehicle) {
-    return `
+  return `
     <div class="vehicle-detail">
       
       <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${
@@ -214,6 +214,38 @@ Util.buildEmailList = async function (account_id = null) {
   });
   emailList += "</select>";
   return emailList;
+};
+
+/* ****************************************
+ *  Check Login for Comments
+ * ************************************ */
+Util.checkLoginComment = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next();
+  } else {
+    req.flash("notice", "Please log in if you want to comment.");
+    return res.redirect("/account/login");
+  }
+};
+
+/************************
+ * Build the comment HTML
+ ********************/
+Util.buildCommentsSection = async function (data) {
+  let comments = "";
+  if (!data) {
+    comments = "<li>There are no comments.</li>";
+  } else {
+    data.forEach((comment) => {
+      comments +=
+        "<li class='comment-list'> <strong>" +
+        comment.account_firstname +
+        " commented :</strong> " +
+        comment.comment_text +
+        "</li>";
+    });
+  }
+  return comments;
 };
 
 module.exports = Util;

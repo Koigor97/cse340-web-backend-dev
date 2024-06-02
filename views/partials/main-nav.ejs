@@ -28,7 +28,7 @@
   </div>
 
   <% if (locals.loggedin) {%>
-            <a href="/account" title="Click to see account" class="accounthov"> Welcome <%- locals.accountData.account_firstname %></a><span> | </span><a href="/account/logout" title="Click to log out" class="accounthov">Logout</a>
+            <a href="/account" title="Click to see account" class="accounthov"> Welcome <%- locals.accountData.account_firstname %></a><span> | </span><a href="/account/logout" title="Click to log out" class=" nav__link account-btn">Logout</a>
         <% } else{ %>
              <a
               class="nav__link account-btn"

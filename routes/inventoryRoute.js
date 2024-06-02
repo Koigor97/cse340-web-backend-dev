@@ -11,10 +11,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:vehicleId", invController.buildVehicleDetail);
 
 // Route to build inventory management view
-router.get(
-  "/",
-  invController.buildManagementView
-);
+router.get("/", invController.buildManagementView);
 
 // Route to build classification view
 router.get(
@@ -62,7 +59,10 @@ router.post(
 );
 
 // Route to process deleting an inventory item
-router.post("/delete", utilities.handleError(invController.deleteInventoryItem));
+router.post(
+  "/delete",
+  utilities.handleError(invController.deleteInventoryItem)
+);
 
 // Route to handle the update request
 router.post(
@@ -72,10 +72,18 @@ router.post(
   utilities.handleError(invController.updateInventory)
 );
 
+// Route to process adding a comment
+router.post(
+  "/comment",
+  utilities.checkLoginComment,
+  validation.commentRules(),
+  validation.checkCommentData,
+  utilities.handleError(invController.sendComment)
+);
+
 // Route for error testing
 router.get("/cause-error", (req, res, next) => {
   next(new Error("Intentional error for testing purposes"));
 });
 
 module.exports = router;
-

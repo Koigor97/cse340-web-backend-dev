@@ -25,12 +25,18 @@ invCont.buildVehicleDetail = async function (req, res, next) {
   console.log(vehicle_id);
   const vehicle = await invModel.getVehicleById(vehicle_id);
   console.log(vehicle);
+  const comment_data = await invModel.getCommentByInventoryId(vehicle_id)
+  console.log(comment_data)
+  const comments = await utilities.buildCommentsSection(comment_data)
   const nav = await utilities.getNav();
   const vehicleHtml = utilities.buildVehicleDetail(vehicle);
   res.render("./inventory/vehicleDetail", {
     title: `${vehicle.inv_make} ${vehicle.inv_model}`,
     nav,
     vehicleHtml,
+    vehicle_id,
+    comments,
+    errors: null,
   });
 };
 
@@ -252,24 +258,27 @@ invCont.buildDeleteConfirmation = async function (req, res, next) {
     inv_year: itemData.inv_year,
     inv_price: itemData.inv_price,
   });
-}
+};
 
 /* ***************************
  *  Delete Inventory Item
  * ************************** */
 invCont.deleteInventoryItem = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  const { inv_id, inv_make, inv_model, inv_year, inv_price } = req.body
+  let nav = await utilities.getNav();
+  const { inv_id, inv_make, inv_model, inv_year, inv_price } = req.body;
 
-  const deleteResult  = await invModel.deleteInventory(inv_id)
+  const deleteResult = await invModel.deleteInventory(inv_id);
 
   if (deleteResult) {
-    nav = await utilities.getNav()
-    req.flash("notice", `The ${inv_make} ${inv_model} was succesfully deleted.`)
-    res.redirect("/inv/")
+    nav = await utilities.getNav();
+    req.flash(
+      "notice",
+      `The ${inv_make} ${inv_model} was succesfully deleted.`
+    );
+    res.redirect("/inv/");
   } else {
-    const itemName = `${inv_make} ${inv_model}`
-    req.flash("notice", "Sorry, deleting failed.")
+    const itemName = `${inv_make} ${inv_model}`;
+    req.flash("notice", "Sorry, deleting failed.");
     res.status(501).render("inventory/delete-confirm", {
       title: "Delete " + itemName,
       nav,
@@ -279,8 +288,31 @@ invCont.deleteInventoryItem = async function (req, res, next) {
       inv_model,
       inv_year,
       inv_price,
-    })
+    });
   }
-}
+};
+
+/* ***************************
+ *  Process adding a comment
+ * ************************** */
+invCont.sendComment = async function (req, res) {
+  let nav = await utilities.getNav();
+  const { vehicle_id, comment_text, account_id } = req.body;
+
+  const commentSent = await invModel.sendComment(
+    vehicle_id,
+    comment_text,
+    account_id
+  );
+
+  if (commentSent) {
+    nav = await utilities.getNav();
+    req.flash("notice", `The comment was succesfully added.`);
+    res.redirect(`/inv/detail/${vehicle_id}`);
+  } else {
+    req.flash("notice", "Sorry, sending the comment failed.");
+    res.redirect(`/inv/detail/${vehicle_id}`);
+  }
+};
 
 module.exports = invCont;

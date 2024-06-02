@@ -146,7 +146,7 @@ async function updateInventory(
  * ************************** */
 async function deleteInventoryItem(inv_id) {
   try {
-    const sql = 'DELETE FROM inventory WHERE inv_id = $1';
+    const sql = "DELETE FROM inventory WHERE inv_id = $1";
     const data = await pool.query(sql, [inv_id]);
     return data; // return the number of rows affected
   } catch (error) {
@@ -156,15 +156,43 @@ async function deleteInventoryItem(inv_id) {
 }
 
 /* ***************************
-  *  fix bug happening to images
-  * and thumbnails
-* ************************** */
+ *  fix bug happening to images
+ * and thumbnails
+ * ************************** */
 async function fixUpdate() {
   try {
-  const sql = "UPDATE public.inventory SET inv_image = REPLACE(inv_image, '&#x2F;', '/'), inv_thumbnail = REPLACE(inv_thumbnail, '&#x2F;', '/') RETURNING *"
-  return await pool.query(sql)
+    const sql =
+      "UPDATE public.inventory SET inv_image = REPLACE(inv_image, '&#x2F;', '/'), inv_thumbnail = REPLACE(inv_thumbnail, '&#x2F;', '/') RETURNING *";
+    return await pool.query(sql);
   } catch (error) {
-    return error.message
+    return error.message;
+  }
+}
+
+async function sendComment(inv_id, comment_text, account_id) {
+  try {
+    const sql =
+      "INSERT INTO comment (comment_text, inv_id, account_id) VALUES ($1, $2, $3) RETURNING *";
+    return await pool.query(sql, [comment_text, inv_id, account_id]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
+async function getCommentByInventoryId(inv_id) {
+  try {
+    const data = await pool.query(
+      `SELECT comment_id, comment_text, inv_id, account_firstname
+        FROM public.comment
+          JOIN public.account
+          ON public.comment.account_id = public.account.account_id 
+        WHERE inv_id = $1
+        ORDER BY comment_id ASC`,
+      [inv_id]
+    );
+    return data.rows;
+  } catch (error) {
+    console.error("getInventoryDetail error " + error);
   }
 }
 
@@ -177,6 +205,7 @@ module.exports = {
   getInventoryById,
   updateInventory,
   deleteInventoryItem,
-  fixUpdate
+  fixUpdate,
+  sendComment,
+  getCommentByInventoryId,
 };
-

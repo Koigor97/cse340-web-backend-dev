@@ -54,8 +54,7 @@ nav li a,
 }
 
 .logo {
-  width: 15rem;
-  height: auto;
+  font-weight: 600;
 }
 
 /* .wrapper {
@@ -129,6 +128,13 @@ header {
   align-items: center;
 }
 
+.accounthov {
+  order: -2;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--primary-color-variant-1);
+}
+
 .account-icon {
   display: none;
 }
@@ -151,6 +157,7 @@ header {
 .vehicles-nav ul {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .vehicles-nav ul li {
@@ -633,6 +640,26 @@ form p {
 
 .center {
   padding-inline: 1.5rem;
+}
+
+/* Comment Area */
+#comment_text {
+  width: 100%;
+}
+.comment-list {
+  padding: 5px;
+  min-height: 50px;
+}
+li.comment-list:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+.ulcomment {
+  list-style: none;
+  padding-left: 0;
+}
+
+.comment-box {
+  margin-inline: 1rem
 }
 
 @media only screen and (min-width: 38.062em) {
